@@ -24,6 +24,55 @@
             localStorage.setItem(key, contact.serialize())
         }
     }
+    
+    function testEmail(){
+        let messageArea = $("messageArea").hide()
+
+        let fullEmailPattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/g
+        $('#emailAddress').on("blue", function(){
+            let fullEmailText=$(this).val()
+
+            if(!fullEmailPattern.test(fullEmailText)){
+                $(this).trigger("focus").trigger("select")
+
+                messageArea.addClass("alert alert-danger")
+                messageArea.text("Must enter a valid Email including @ and a . Psease.")
+                messageArea.show()
+
+            } else {
+                // success in matching email with regex
+
+                messageArea.removeAttr("Class")
+                messageArea.hide()
+            }
+        })
+
+        
+    }
+    function testNumber(){
+        let messageArea = $("messageArea").hide()
+
+        let fullNumberPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+        $('#contactNumber').on("blue", function(){
+            let fullNumberText=$(this).val()
+
+            if(!fullNumberPattern.test(fullNumberText)){
+                $(this).trigger("focus").trigger("select")
+
+                messageArea.addClass("alert alert-danger")
+                messageArea.text("Must enter a valid Email including @ and a . Psease.")
+                messageArea.show()
+
+            } else {
+                // success in matching phone number with regex
+
+                messageArea.removeAttr("Class")
+                messageArea.hide()
+            }
+        })
+
+        
+    }
 
     function testFullName(){
         let messageArea = $("messageArea").hide()
@@ -54,6 +103,8 @@
         console.log("Contact Us Page")
 
         testFullName()
+        testEmail()
+        testNumber()
 
         let submitButton = document.getElementById("submitButton")
         let subscribeCheckbox = document.getElementById("subscribeCheckbox")
